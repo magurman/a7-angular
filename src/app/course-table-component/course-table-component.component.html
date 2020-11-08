@@ -1,8 +1,24 @@
-<div class="container-fluid">
-  <h3>Courses</h3>
-  <ul class="list-group">
-    <li class="list-group-item" *ngFor="let course of courses">
-      {{course.title}}
-    </li>
-  </ul>
+<div class="d-flex">
+  <div class="col-4 flex-grow-1">
+    <h5>Courses</h5>
+    <ul class="list-group">
+      <li class="list-group-item" *ngFor="let course of courses">
+        <a (click)="courseViewer(course);" routerLink="/course/{{course._id}}">
+          {{course.title}}
+        </a>
+      </li>
+    </ul>
+  </div>
+
+  <div class="col-8">
+    <router-outlet>
+    </router-outlet>
+<!--    <app-course-viewer-component *ngIf="selectedCourse !== undefined; else elseBlock">-->
+<!--    </app-course-viewer-component>-->
+<!--    <ng-template #elseBlock>-->
+<!--      <div class="container">-->
+<!--        COURSE NOT SELECTED-->
+<!--      </div>-->
+<!--    </ng-template>-->
+  </div>
 </div>

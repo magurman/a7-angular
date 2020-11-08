@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import CourseServiceClient from '../../services/CourseServiceClient';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-course-table-component',
@@ -9,14 +10,24 @@ import CourseServiceClient from '../../services/CourseServiceClient';
 
 export class CourseTableComponentComponent implements OnInit {
 
-  private courseService: CourseServiceClient;
   courses: Array<any>;
+  selectedCourse: any;
 
-  constructor() {
-    this.courseService = new CourseServiceClient();
+  constructor(private router: Router, private courseService: CourseServiceClient) {
   }
 
   ngOnInit(): void {
-    this.courseService.findAllCourses(resp => this.courses = resp.data);
+    console.log('ngOnInit for CourseTableComponent');
+    this.courseService.findAllCourses(resp => this.courses = resp);
+  }
+
+  courseViewer(course: any): void {
+    this.selectedCourse = course;
+
+    if (this.selectedCourse === undefined) {
+      alert('Course not selected');
+    } else {
+      this.router.navigate([`course/`, this.selectedCourse._id]);
+    }
   }
 }
