@@ -23,6 +23,7 @@ export class CourseTableComponentComponent implements OnInit {
 
   courseViewer(course: any): void {
     this.selectedCourse = course;
+    console.log(course);
 
     if (this.selectedCourse === undefined) {
       alert('Course not selected');
